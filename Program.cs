@@ -1,6 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using SocialMediaLinks.Models;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.Configure<SocialMediaLinkOptions>(
+	builder.Configuration.GetSection("SocialMediaLinks")
+);
+
+var app = builder.Build();
+app.UseStaticFiles();
+app.UseRouting();
+app.MapControllers();
 
 app.Run();
